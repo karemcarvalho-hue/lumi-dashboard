@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-surface: #eef5ff;
+  --primary-surface-highlight: #96c1fc;
+  --primary-interactive: #006BC8;
+  --primary-interactive-hover: #0050c3;
+  --primary-text-low: #002C53;
+  --primary-text-high: #00255a;
+  
+  --success-surface: #defef2;
+  --success-surface-highlight: #7af7c7;
+  --success-interactive: #00a656;
+  --success-text-low: #005333;
+  
+  --danger-surface: #ffecec;
+  --danger-surface-highlight: #ffb3b3;
+  --danger-interactive: #d82c2c;
+  --danger-text-low: #530001;
+  
+  --warning-surface: #fff4e0;
+  --warning-surface-highlight: #ffcc66;
+  --warning-interactive: #cc7a00;
+  --warning-text-low: #533300;
+  
+  --neutral-background: #ffffff;
+  --neutral-surface: #f6f6f6;
+  --neutral-surface-highlight: #d1d1d1;
+  --neutral-surface-disabled: #e7e7e7;
+  --neutral-text-high: #0a0a0a;
+  --neutral-text-low: #5d5d5d;
+  --neutral-text-disabled: #a0a0a0;
+  
+  --ai-purple: #e8def8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--neutral-background);
+  color: var(--neutral-text-high);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-surface-highlight);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-text-disabled);
+}
+
+/* AI Gradient - matches Figma Gradiente IA */
+.ai-gradient {
+  background: linear-gradient(72deg, rgba(0, 80, 195, 0.05) 16%, rgba(71, 54, 180, 0.05) 42%, rgba(216, 68, 110, 0.05) 83%);
+}
+
+.ai-gradient-solid {
+  background: linear-gradient(17deg, #0050C3 28%, #4629BA 49%, #D8446E 83%);
+}
+
+.ai-text-gradient {
+  background: linear-gradient(9deg, #0050C3 28%, #4629BA 49%, #D8446E 83%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* AI Focus ring - purple glow */
+.ai-focus-ring {
+  box-shadow: 0px 0px 0px 3px #e2dcfa;
+}
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* AI Loading Animation - Twinkle effect */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+}
