@@ -36,7 +36,7 @@ export function AppShell({ children, sidebar, onLumiClick, lumiActive, sidebarFu
           {sidebar && (
             <aside 
               className={`border-l border-neutral-surface-disabled bg-neutral-surface flex-shrink-0 transition-all duration-300 p-2 ${
-                sidebarFullscreen ? 'flex-1' : 'w-[560px]'
+                sidebarFullscreen ? 'flex-1' : 'w-[340px]'
               }`}
             >
               <div className="h-full bg-white border border-neutral-surface-highlight rounded-lg overflow-hidden flex flex-col">

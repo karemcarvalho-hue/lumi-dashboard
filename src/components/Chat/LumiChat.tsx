@@ -692,15 +692,30 @@ export function LumiChat({
     // 4 steps × 1500ms = 6000ms; add buffer
     const THINKING_DURATION_MS = 6500
 
+    // ── Export-specific thinking steps (shorter, more relevant) ──
+    const EXPORT_THINKING_STEPS: ThinkingStep[] = [
+      { icon: 'sparkle', text: 'Preparando exportação...' },
+      { icon: 'table', text: 'Gerando arquivo...' },
+    ]
+    // 2 steps × 1500ms = 3000ms; add buffer
+    const EXPORT_THINKING_DURATION_MS = 3500
+
     /**
      * Helper: show thinking animation, then resolve with the real message.
      * Used by every order/export/sales flow that produces an orders card.
+     * Accepts optional custom steps and duration for context-specific animations.
      */
-    const showThinkingThenResolve = (buildResponse: () => Message) => {
+    const showThinkingThenResolve = (
+      buildResponse: () => Message,
+      customSteps?: ThinkingStep[],
+      customDurationMs?: number,
+    ) => {
+      const steps = customSteps ?? ORDER_THINKING_STEPS
+      const duration = customDurationMs ?? THINKING_DURATION_MS
       const thinkingId = (Date.now() + 1).toString()
       setMessages((prev) => [
         ...prev,
-        { id: thinkingId, type: 'ai' as const, content: '', isThinking: true, thinkingSteps: ORDER_THINKING_STEPS },
+        { id: thinkingId, type: 'ai' as const, content: '', isThinking: true, thinkingSteps: steps },
       ])
       setTimeout(scrollToBottom, 100)
 
@@ -714,7 +729,7 @@ export function LumiChat({
           return updated
         })
         setTimeout(scrollToBottom, 150)
-      }, THINKING_DURATION_MS)
+      }, duration)
     }
 
     // ── Detect which intent this message matches ──
@@ -783,7 +798,7 @@ export function LumiChat({
       return
     }
 
-    // 4. Export requests — ALWAYS show thinking animation, then card + export job
+    // 4. Export requests — shorter thinking animation, then card + export job
     if (isExportQuery(content)) {
       showThinkingThenResolve(() => {
         const result = handleChatExport(content)
@@ -814,7 +829,7 @@ export function LumiChat({
           exportJobId: result as string,
           timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
         }
-      })
+      }, EXPORT_THINKING_STEPS, EXPORT_THINKING_DURATION_MS)
       return
     }
 

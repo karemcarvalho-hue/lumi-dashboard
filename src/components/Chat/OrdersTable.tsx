@@ -938,7 +938,7 @@ export function OrdersTable({
   showApplyButton = true
 }: OrdersTableProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isCardCollapsed, setIsCardCollapsed] = useState(true)
+  const [isCardCollapsed, setIsCardCollapsed] = useState(false)
   const [isRowsExpanded, setIsRowsExpanded] = useState(false)
   const [isApplied, setIsApplied] = useState(false)
   const [isApplying, setIsApplying] = useState(false)
@@ -1157,19 +1157,6 @@ export function OrdersTable({
           </div>
         )}
 
-        {/* "Ver mais" button visible when card is collapsed — only way to expand */}
-        {isCardCollapsed && (
-          <div className="flex items-center px-2.5 py-2 border-t border-neutral-surface-disabled bg-white rounded-b-lg">
-            <button
-              onClick={() => setIsCardCollapsed(false)}
-              className="flex items-center gap-1 py-1 text-xs text-neutral-text-low hover:text-neutral-text-high transition-colors"
-            >
-              <span>Ver mais</span>
-              <ChevronDownIcon className="w-3 h-3" />
-            </button>
-          </div>
-        )}
-
         {/* Collapsible content – CSS grid trick for smooth auto-height animation */}
         <div
           className={`grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
@@ -1296,8 +1283,7 @@ export function OrdersTable({
           setIsModalOpen(false)
           // 2. Start the export (reuses the card-level export)
           handleCardExport()
-          // 3. Collapse the card to show the loading spinner
-          setIsCardCollapsed(true)
+          // Card stays open so the user can see the export progress in the header
         }}
       />
     </>
